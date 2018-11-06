@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.samuelfalci.cursomc.domain;
 
 import java.io.Serializable;
@@ -13,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 /**
@@ -20,29 +17,36 @@ import javax.persistence.ManyToMany;
  * @author Samuka
  */
 @Entity
-public class Categoria implements Serializable{
+public class Produto implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer Id;
     private String nome;
-    
-    @ManyToMany(mappedBy = "categorias")
-    private List<Produto> produtos = new ArrayList<>();
+    private double preco;
 
-    public Categoria() {
+    @ManyToMany
+    @JoinTable(name = "PRODUTO_CATEGORIA",
+            joinColumns = @JoinColumn(name = "produto_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id")
+    )
+    private List<Categoria> categorias = new ArrayList<>();
+
+    public Produto() {
     }
 
-    public Categoria(Integer id, String nome) {
-        this.id = id;
+    public Produto(Integer Id, String nome, double preco) {
+        this.Id = Id;
         this.nome = nome;
+        this.preco = preco;
     }
 
     public Integer getId() {
-        return id;
+        return Id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer Id) {
+        this.Id = Id;
     }
 
     public String getNome() {
@@ -53,20 +57,26 @@ public class Categoria implements Serializable{
         this.nome = nome;
     }
 
-    public List<Produto> getProdutos() {
-        return produtos;
+    public double getPreco() {
+        return preco;
     }
 
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
+    public void setPreco(double preco) {
+        this.preco = preco;
     }
-    
-    
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
+    }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 71 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.Id);
         return hash;
     }
 
@@ -81,14 +91,11 @@ public class Categoria implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Categoria other = (Categoria) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        final Produto other = (Produto) obj;
+        if (!Objects.equals(this.Id, other.Id)) {
             return false;
         }
         return true;
     }
 
- 
-    
-    
 }
