@@ -2,7 +2,9 @@
 package com.samuelfalci.cursomc.domain;
 
 import com.samuelfalci.cursomc.domain.enums.EstadoPagamento;
+import javax.persistence.Entity;
 
+@Entity
 public class PagamentoComCartao extends Pagamento{
     private Integer numeroDeParcelas;
 
