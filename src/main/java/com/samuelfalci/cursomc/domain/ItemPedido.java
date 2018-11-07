@@ -1,6 +1,7 @@
 
 package com.samuelfalci.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.EmbeddedId;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 @Entity
 public class ItemPedido implements Serializable{
     
+    @JsonIgnore
     @EmbeddedId
     private ItemPedidoPk id = new ItemPedidoPk();
     
@@ -27,9 +29,11 @@ public class ItemPedido implements Serializable{
         id.setProduto(produto);
     }
 
+    @JsonIgnore
     public Pedido getPedido(){
         return id.getPedido();
     }
+    
     public Produto getProduto(){
         return id.getProduto();
     }
