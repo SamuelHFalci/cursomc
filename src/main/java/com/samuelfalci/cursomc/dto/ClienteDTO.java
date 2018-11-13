@@ -6,14 +6,12 @@
 package com.samuelfalci.cursomc.dto;
 
 import com.samuelfalci.cursomc.domain.Cliente;
+import com.samuelfalci.cursomc.services.validation.ClienteUpdate;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-/**
- *
- * @author Samuka
- */
+@ClienteUpdate
 public class ClienteDTO {
 
     private Integer id;
