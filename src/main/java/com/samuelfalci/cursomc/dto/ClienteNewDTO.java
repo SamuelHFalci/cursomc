@@ -5,30 +5,37 @@
  */
 package com.samuelfalci.cursomc.dto;
 
+import com.samuelfalci.cursomc.services.validation.ClienteInsert;
 import java.io.Serializable;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
-/**
- *
- * @author Samuka
- */
-public class ClienteNewDTO implements Serializable{
-    
+@ClienteInsert
+public class ClienteNewDTO implements Serializable {
+
+    @NotEmpty(message = "Preenchimento Obrigatorio")
+    @Length(min = 5, max = 120, message = "O tamanho deve ser entre 5 e 120 caracteres")
     private String nome;
+    @NotEmpty(message = "Preenchimento Obrigatorio")
+    @Email(message = "Email Inválido")
     private String email;
+    @NotEmpty(message = "Preenchimento Obrigatorio")
     private String cpfOuCnpj;
     private Integer tipo;
-    
-    
+    @NotEmpty(message = "Preenchimento Obrigatorio")
     private String logradouro;
+    @NotEmpty(message = "Preenchimento Obrigatorio")
     private String numero;
     private String complemento;
     private String bairro;
+    @NotEmpty(message = "Preenchimento Obrigatorio")
     private String cep;
-    
+    @NotEmpty(message = "Preenchimento Obrigatorio")
     private String telefone1;
     private String telefone2;
     private String telefone3;
-    
+
     private Integer cidadeId;
 
     public ClienteNewDTO() {
@@ -137,6 +144,5 @@ public class ClienteNewDTO implements Serializable{
     public void setCidadeId(Integer cidadeId) {
         this.cidadeId = cidadeId;
     }
-    
-    
+
 }
